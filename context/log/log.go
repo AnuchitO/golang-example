@@ -9,8 +9,6 @@ import (
 	"log"
 )
 
-const requestIDKey = 19
-
 func Println(v ...interface{}) {
 	log.Println(v...)
 }
@@ -18,6 +16,10 @@ func Println(v ...interface{}) {
 func Fatal(v ...interface{}) {
 	log.Fatal(v...)
 }
+
+type key int64
+
+const requestIDKey = key(19)
 
 func PrintlnContext(ctx context.Context, msg ...interface{}) {
 	id, ok := ctx.Value(requestIDKey).(int64)
