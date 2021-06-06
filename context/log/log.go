@@ -3,14 +3,23 @@ package log
 import (
 	"context"
 	"fmt"
-	"log"
 	"math/rand"
 	"net/http"
+
+	"log"
 )
 
 const requestIDKey = 19
 
-func Println(ctx context.Context, msg ...interface{}) {
+func Println(v ...interface{}) {
+	log.Println(v...)
+}
+
+func Fatal(v ...interface{}) {
+	log.Fatal(v...)
+}
+
+func PrintlnContext(ctx context.Context, msg ...interface{}) {
 	id, ok := ctx.Value(requestIDKey).(int64)
 	if !ok {
 		log.Println("could not find request ID in context")
